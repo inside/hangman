@@ -1,6 +1,3 @@
-// This is the hangman game written in es2015.
-// To run you can use the command:
-// babel-node --presets es2015 hangman.js
 let readline = require('readline')
 let rl = readline.createInterface(process.stdin, process.stdout)
 let wordChosen = false

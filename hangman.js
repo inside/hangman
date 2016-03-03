@@ -37,7 +37,7 @@ rl.on('line', (line) => {
         populateGuess()
 
         if (guess.indexOf(placeholder) === -1) {
-          console.log(`Word was ${word}. You win!!!`)
+          console.log(`You win!!! Word was ${word}.`)
           rl.close()
         }
       } else {
@@ -51,7 +51,7 @@ rl.on('line', (line) => {
       drawHangman()
 
       if (tries <= 0) {
-        console.log(`Word was ${word}. You lost.`)
+        console.log(`You lost. Word was ${word}.`)
         rl.close()
       }
     } else {

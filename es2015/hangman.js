@@ -5,7 +5,7 @@ let word
 let letter
 let letters = []
 let guess = []
-let tries = 5
+let tries = 6
 const placeholder = '-'
 
 rl.setPrompt('Choose a word: ')
@@ -45,7 +45,7 @@ rl.on('line', (line) => {
 
       console.log(`Guessed letters are ${letters.join(', ')}.`)
       console.log(`Guess is ${guess.join('')}.`)
-      drawHangman()
+      console.log(drawHangman(tries))
 
       if (tries <= 0) {
         console.log(`You lost. Word was ${word}.`)
@@ -79,43 +79,52 @@ function populateGuess(guess, letter, word) {
   return guess
 }
 
-function drawHangman() {
-  console.log('     _______')
-  console.log('    |/      |')
+function drawHangman(tries) {
+  let ret = []
 
-  if (tries === 5) {
-    console.log('    |')
-    console.log('    |')
-    console.log('    |')
-    console.log('    |')
+  ret.push('     _______')
+  ret.push('    |/      |')
+
+  if (tries === 6) {
+    ret.push('    |')
+    ret.push('    |')
+    ret.push('    |')
+    ret.push('    |')
+  } else if (tries === 5) {
+    ret.push('    |      (_)')
+    ret.push('    |        ')
+    ret.push('    |        ')
+    ret.push('    |')
   } else if (tries === 4) {
-    console.log('    |      (_)')
-    console.log('    |       |')
-    console.log('    |       |')
-    console.log('    |')
+    ret.push('    |      (_)')
+    ret.push('    |       |')
+    ret.push('    |       |')
+    ret.push('    |')
   } else if (tries === 3) {
-    console.log('    |      (_)')
-    console.log('    |      /|')
-    console.log('    |       |')
-    console.log('    |')
+    ret.push('    |      (_)')
+    ret.push('    |      /|')
+    ret.push('    |       |')
+    ret.push('    |')
   } else if (tries === 2) {
-    console.log('    |      (_)')
-    console.log('    |      /|\\')
-    console.log('    |       |')
-    console.log('    |')
+    ret.push('    |      (_)')
+    ret.push('    |      /|\\')
+    ret.push('    |       |')
+    ret.push('    |')
   } else if (tries === 1) {
-    console.log('    |      (_)')
-    console.log('    |      /|\\')
-    console.log('    |       |')
-    console.log('    |      /')
+    ret.push('    |      (_)')
+    ret.push('    |      /|\\')
+    ret.push('    |       |')
+    ret.push('    |      /')
   } else if (tries === 0) {
-    console.log('    |      (_)')
-    console.log('    |      /|\\')
-    console.log('    |       |')
-    console.log('    |      / \\')
+    ret.push('    |      (_)')
+    ret.push('    |      /|\\')
+    ret.push('    |       |')
+    ret.push('    |      / \\')
   }
 
-  console.log('    |')
-  console.log('____|____')
-  console.log('')
+  ret.push('    |')
+  ret.push('____|____')
+  ret.push('')
+
+  return ret.join('\n')
 }

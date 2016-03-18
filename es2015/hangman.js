@@ -16,7 +16,7 @@ rl.on('line', (line) => {
     if (line.match(/^[a-z]+$/) !== null) {
       word = line
       wordChosen = true
-      initGuess()
+      guess = initGuess(guess)
       rl.setPrompt('')
       rl.write(null, {ctrl: true, name: 'l'})
       console.log(`Guess is ${guess.join('')}.`)
@@ -31,7 +31,7 @@ rl.on('line', (line) => {
       letters.push(letter)
 
       if (word.indexOf(letter) >= 0) {
-        populateGuess()
+        guess = populateGuess(guess, letter, word)
 
         if (guess.indexOf(placeholder) === -1) {
           console.log(`You win!!! Word was ${word}.`)
@@ -61,18 +61,22 @@ rl.on('line', (line) => {
   process.exit(0)
 })
 
-function initGuess() {
+function initGuess(guess) {
   for (let i = 0; i < word.length;  i++) {
     guess[i] = placeholder
   }
+
+  return guess
 }
 
-function populateGuess() {
+function populateGuess(guess, letter, word) {
   for (let i = 0; i < word.length;  i++) {
     if (word[i] === letter) {
       guess[i] = letter
     }
   }
+
+  return guess
 }
 
 function drawHangman() {
